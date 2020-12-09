@@ -44,3 +44,7 @@ environments:
         schedule: "*/15 * * * *"
         command: drush cron
         service: cli
+      - name: drush cron native
+        schedule: "0 * * * *"
+        command: drush cron
+        service: cli
