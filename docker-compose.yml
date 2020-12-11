@@ -90,7 +90,7 @@ services:
     labels:
       #lagoon.type: mariadb  #use dbaas operator
       lagoon.type: mariadb-single #create mariadb pod
-      lagoon.persistent.size: 25G
+      lagoon.persistent.size: 26G
       lando.type: mariadb-drupal
       
     ports:
@@ -115,7 +115,7 @@ services:
     labels:
       lagoon.type: solr
       lando.type: solr-drupal
-      lagoon.persistent.size: 26G
+      lagoon.persistent.size: 25G
     ports:
       - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
     environment:
