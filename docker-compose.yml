@@ -88,8 +88,10 @@ services:
   mariadb:
     image: uselagoon/mariadb-drupal:latest
     labels:
-      lagoon.type: mariadb
+      #lagoon.type: mariadb  #use dbaas operator
+      lagoon.type: mariadb-single #create mariadb pod
       lando.type: mariadb-drupal
+      
     ports:
       - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
     << : *default-user # uses the defined user from top
