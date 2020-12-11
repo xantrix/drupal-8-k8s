@@ -90,7 +90,7 @@ services:
     labels:
       #lagoon.type: mariadb  #use dbaas operator
       lagoon.type: mariadb-single #create mariadb pod
-      lagoon.persistent.size: 26G
+      lagoon.persistent.size: 40G
       lando.type: mariadb-drupal
       
     ports:
