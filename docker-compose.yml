@@ -90,7 +90,6 @@ services:
     labels:
       #lagoon.type: mariadb  #use dbaas operator
       lagoon.type: mariadb-single #create mariadb pod
-      lagoon.persistent.size: 40G
       lando.type: mariadb-drupal
       
     ports:
@@ -99,42 +98,42 @@ services:
     environment:
       << : *default-environment
 
-  redis:
-    image: uselagoon/redis-5:latest
-    labels:
-      lagoon.type: redis
-      lando.type: redis
-    ports:
-      - "6379" # exposes the port 6379 with a random local port, find it with `docker-compose port redis 6379`
-    << : *default-user # uses the defined user from top
-    environment:
-      << : *default-environment
+  # redis:
+  #   image: uselagoon/redis-5:latest
+  #   labels:
+  #     lagoon.type: redis
+  #     lando.type: redis
+  #   ports:
+  #     - "6379" # exposes the port 6379 with a random local port, find it with `docker-compose port redis 6379`
+  #   << : *default-user # uses the defined user from top
+  #   environment:
+  #     << : *default-environment
 
-  solr:
-    image: uselagoon/solr-7.7-drupal:latest
-    labels:
-      lagoon.type: solr
-      lando.type: solr-drupal
-      lagoon.persistent.size: 25G
-    ports:
-      - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
-    environment:
-      << : *default-environment
+  # solr:
+  #   image: uselagoon/solr-7.7-drupal:latest
+  #   labels:
+  #     lagoon.type: solr
+  #     lando.type: solr-drupal
+  #     lagoon.persistent.size: 25G
+  #   ports:
+  #     - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
+  #   environment:
+  #     << : *default-environment
 
-  varnish:
-    image: uselagoon/varnish-drupal:latest
-    labels:
-      lagoon.type: varnish
-      lando.type: varnish-drupal
-    links:
-      - nginx # links varnish to the nginx in this docker-compose project, or it would try to connect to any nginx running in docker
-    << : *default-user # uses the defined user from top
-    environment:
-      << : *default-environment
-      VARNISH_BYPASS: "true" # by default we bypass varnish, change to 'false' or remove in order to tell varnish to cache if possible
-    networks:
-      - amazeeio-network
-      - default
+  # varnish:
+  #   image: uselagoon/varnish-drupal:latest
+  #   labels:
+  #     lagoon.type: varnish
+  #     lando.type: varnish-drupal
+  #   links:
+  #     - nginx # links varnish to the nginx in this docker-compose project, or it would try to connect to any nginx running in docker
+  #   << : *default-user # uses the defined user from top
+  #   environment:
+  #     << : *default-environment
+  #     VARNISH_BYPASS: "true" # by default we bypass varnish, change to 'false' or remove in order to tell varnish to cache if possible
+  #   networks:
+  #     - amazeeio-network
+  #     - default
 
 networks:
   amazeeio-network:
