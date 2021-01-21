@@ -1,5 +1,5 @@
-x-task:
-  &default-tasks
+x-default-tasks: &default-tasks
+  cronjobs:
     - name: drush cron
       schedule: "*/15 * * * *"
       command: drush cron
@@ -34,8 +34,6 @@ tasks:
         command: drush -y cr
         service: cli
 
-
-
 environments:
   main:
     routes:
@@ -67,5 +65,9 @@ environments:
             annotations:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#stage";
+    << : *default-tasks
     cronjobs:
-      << : *default-tasks
+      - name: ls
+        schedule: "*/15 * * * *"
+        command: ls
+        service: cli      
