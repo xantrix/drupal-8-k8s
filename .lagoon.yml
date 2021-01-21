@@ -1,12 +1,12 @@
 x-default-tasks: &default-tasks
   cronjobs:
-    - name: drush cron
+    - name: default ls
       schedule: "*/15 * * * *"
-      command: drush cron
+      command: ls
       service: cli
-    - name: drush cron native
+    - name: default ls native
       schedule: "0 * * * *"
-      command: drush cron
+      command: ls
       service: cli
 
 docker-compose-yaml: docker-compose.yml
@@ -45,12 +45,9 @@ environments:
             annotations:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#main";
+    << : *default-tasks
     cronjobs:
-      - name: drush cron
-        schedule: "*/15 * * * *"
-        command: drush cron
-        service: cli
-      - name: drush cron native
+      - name: drush cron main native
         schedule: "0 * * * *"
         command: drush cron
         service: cli
@@ -67,7 +64,7 @@ environments:
                 add_header X-branch "#stage";
     << : *default-tasks
     cronjobs:
-      - name: ls
-        schedule: "*/15 * * * *"
+      - name: ls env stage native
+        schedule: "0 * * * *"
         command: ls
         service: cli      
