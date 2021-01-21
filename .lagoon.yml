@@ -1,3 +1,14 @@
+x-task:
+  &default-tasks
+    - name: drush cron
+      schedule: "*/15 * * * *"
+      command: drush cron
+      service: cli
+    - name: drush cron native
+      schedule: "0 * * * *"
+      command: drush cron
+      service: cli
+
 docker-compose-yaml: docker-compose.yml
 
 project: drupal8-example-advanced
@@ -27,35 +38,15 @@ tasks:
 
 environments:
   main:
-    # routes:
-    #   - nginx:
-    #     - drupal9.amazee.io:
-    #         annotations:
-    #           nginx.ingress.kubernetes.io/server-snippet: |
-    #             add_header X-branch "#main";
-    cronjobs:
-      - name: drush cron
-        schedule: "*/15 * * * *"
-        command: drush cron
-        service: cli
-      - name: drush cron native
-        schedule: "0 * * * *"
-        command: drush cron
-        service: cli
-  
-  9.x:
     routes:
+      # nginx.main.salvo-d8.de3.amazee.io
       - nginx:
-        - drupal9.amazee.io:
+        - main-salvo-d8.duckdns.org:
+            tls-acme: "true"
+            insecure: Redirect
             annotations:
               nginx.ingress.kubernetes.io/server-snippet: |
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-Drupal "#Drupal9 on Lagoon #CelebrateDrupal";
+                add_header X-branch "#main";
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
@@ -65,3 +56,16 @@ environments:
         schedule: "0 * * * *"
         command: drush cron
         service: cli
+
+  stage:
+    routes:
+      # nginx.stage.salvo-d8.de3.amazee.io
+      - nginx:
+        - stage-salvo-d8.duckdns.org:
+            tls-acme: "true"
+            insecure: Redirect
+            annotations:
+              nginx.ingress.kubernetes.io/server-snippet: |
+                add_header X-branch "#stage";
+    cronjobs:
+      << : *default-tasks
