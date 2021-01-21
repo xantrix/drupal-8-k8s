@@ -1,10 +1,12 @@
-x-task:
-  &default-tasks
-    - name: drush cron
+definitions:
+  cronjobs:
+    - &default-cron
+      name: default cron
       schedule: "*/15 * * * *"
       command: drush cron
       service: cli
-    - name: drush cron native
+    - &default-cron-native
+      name: default cron native
       schedule: "0 * * * *"
       command: drush cron
       service: cli
@@ -34,8 +36,6 @@ tasks:
         command: drush -y cr
         service: cli
 
-
-
 environments:
   main:
     routes:
@@ -48,11 +48,9 @@ environments:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#main";
     cronjobs:
-      - name: drush cron
-        schedule: "*/15 * * * *"
-        command: drush cron
-        service: cli
-      - name: drush cron native
+      - *default-cron
+      - *default-cron-native
+      - name: drush cron main native
         schedule: "0 * * * *"
         command: drush cron
         service: cli
@@ -68,4 +66,9 @@ environments:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#stage";
     cronjobs:
-      << : *default-tasks
+      - *default-cron
+      - *default-cron-native 
+      - name: ls env stage native
+        schedule: "0 * * * *"
+        command: ls
+        service: cli      
