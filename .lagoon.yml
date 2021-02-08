@@ -1,7 +1,12 @@
 definitions:
   cronjobs:
-    - &default-cron
-      name: default cron
+    - &default-cron-5
+      name: default cron 5
+      schedule: "*/5 * * * *"
+      command: drush cron
+      service: cli
+    - &default-cron-15
+      name: default cron 15
       schedule: "*/15 * * * *"
       command: drush cron
       service: cli
@@ -47,8 +52,15 @@ environments:
             annotations:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#main";
+        - main-salvo-d8.duckdns.org:
+            tls-acme: "true"
+            insecure: Redirect
+            annotations:
+              nginx.ingress.kubernetes.io/server-snippet: |
+                add_header X-branch "#main";                
     cronjobs:
-      - *default-cron
+      - *default-cron-5
+      - *default-cron-15
       - *default-cron-native
       - name: drush cron main native
         schedule: "0 * * * *"
@@ -66,7 +78,8 @@ environments:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#stage";
     cronjobs:
-      - *default-cron
+      - *default-cron-5
+      - *default-cron-15
       - *default-cron-native 
       - name: ls env stage native
         schedule: "0 * * * *"
