@@ -3,12 +3,12 @@ definitions:
     - &default-cron-5
       name: default cron 5
       schedule: "*/5 * * * *"
-      command: drush cron
+      command: drush --root=/app cron
       service: cli
     - &default-cron-15
       name: default cron 15
       schedule: "*/15 * * * *"
-      command: drush cron
+      command: drush --root=/app cron
       service: cli
     - &default-cron-native
       name: default cron native
