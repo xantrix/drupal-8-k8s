@@ -52,7 +52,7 @@ environments:
             annotations:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#main";
-        - main-salvo-d8.duckdns.org:
+        - main-ch1-salvo-d8.duckdns.org:
             tls-acme: "true"
             insecure: Redirect
             annotations:
