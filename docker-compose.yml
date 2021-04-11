@@ -89,8 +89,8 @@ services:
     image: uselagoon/mariadb-drupal:latest
     labels:
       #lagoon.type: mariadb  #use dbaas operator
-      lagoon.type: mariadb-single #create mariadb pod
-      lagoon.persistent.size: 40Gi
+      #lagoon.type: mariadb-single #create mariadb pod
+      #lagoon.persistent.size: 40Gi
       lando.type: mariadb-drupal
       
     ports:
