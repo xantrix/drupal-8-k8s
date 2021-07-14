@@ -51,6 +51,17 @@ environments:
         - salvo-d8.de3.amazee.io:
             tls-acme: "true"
             insecure: Redirect
+        # test acme false
+        - salvo-d8.acme-true.ch4.amazee.io:
+            tls-acme: 'true'
+            insecure: Redirect
+        - salvo-d8.acme-false1.ch4.amazee.io:
+            tls-acme: 'false'
+            insecure: Allow
+        - salvo-d8.acme-false2.ch4.amazee.io:
+            tls-acme: "false"
+            #use default for insecure
+        # test acme false
         - main-salvo-d8.duckdns.org:
             tls-acme: "true"
             insecure: Redirect
