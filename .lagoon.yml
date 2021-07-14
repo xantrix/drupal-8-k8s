@@ -51,9 +51,12 @@ environments:
         - salvo-d8.de3.amazee.io:
             tls-acme: "true"
             insecure: Redirect
-        # test acme false
-        - salvo-d8.acme-true.ch4.amazee.io:
+        # test acme
+        - salvo-d8.acme-true1.ch4.amazee.io:
             tls-acme: 'true'
+            insecure: Redirect
+        - salvo-d8.acme-true2.ch4.amazee.io:
+            tls-acme: "true"
             insecure: Redirect
         - salvo-d8.acme-false1.ch4.amazee.io:
             tls-acme: 'false'
@@ -61,14 +64,8 @@ environments:
         - salvo-d8.acme-false2.ch4.amazee.io:
             tls-acme: "false"
             #use default for insecure
-        # test acme false
+        # test acme
         - main-salvo-d8.duckdns.org:
-            tls-acme: "true"
-            insecure: Redirect
-            annotations:
-              nginx.ingress.kubernetes.io/server-snippet: |
-                add_header X-branch "#main";
-        - main-ch1-salvo-d8.duckdns.org:
             tls-acme: "true"
             insecure: Redirect
             annotations:
