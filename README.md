@@ -1,4 +1,4 @@
-# test commit
+# test commit 2
 
 # Composer template for Drupal projects hosted on amazee.io
 
