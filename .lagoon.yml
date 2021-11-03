@@ -67,7 +67,6 @@ environments:
         # test acme
         - main-salvo-d8.duckdns.org:
             tls-acme: "true"
-            insecure: Redirect
             annotations:
               nginx.ingress.kubernetes.io/server-snippet: |
                 add_header X-branch "#main";
