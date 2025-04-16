@@ -60,7 +60,7 @@ environments:
         # - salvo-d8.acme-false2.ch4.amazee.io:
         #     tls-acme: "false"
         # custom route, using cluster domain
-        - main-salvo-d8.ch4.amazee.io
+        - main-salvo-d8.ch4.amazee.io:
             insecure: Redirect
             annotations:
               # https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#whitelist-source-range
